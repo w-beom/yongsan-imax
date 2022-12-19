@@ -17,7 +17,8 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    implementation group: 'org.jsoup', name: 'jsoup', version: '1.15.3'
+    implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '4.7.2'
+    implementation group: 'org.seleniumhq.selenium', name: 'selenium-manager', version: '4.7.2'
 
 }
 
