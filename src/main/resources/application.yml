@@ -2,4 +2,8 @@ server:
   port: 8989
 
 crawler:
-  driver : chrome
+  driver: chrome
+
+messenger:
+  token-id:
+  chat-id:
