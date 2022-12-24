@@ -1,6 +1,5 @@
 package com.youngsanimax.service;
 
-import com.youngsanimax.config.TelegramBot;
 import com.youngsanimax.domain.Browser;
 import com.youngsanimax.domain.Chrome;
 import org.junit.jupiter.api.Test;
@@ -8,12 +7,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-class CrawlerTest {
+class CGVCrawlerServiceTest {
     @Test
     void crawling() throws InterruptedException {
         String areaCode = "01";

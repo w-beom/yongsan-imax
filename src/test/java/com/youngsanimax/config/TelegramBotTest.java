@@ -1,5 +1,7 @@
 package com.youngsanimax.config;
 
+import com.youngsanimax.domain.Message;
+import com.youngsanimax.domain.TelegramBot;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,9 +14,6 @@ class TelegramBotTest {
 
     @Test
     public void sendMessageTest() {
-        System.out.println(telegramBot.getToken());
-        Messenger messenger = new Messenger();
-        messenger.sendMessage(telegramBot);
 
     }
 }
