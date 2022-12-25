@@ -1,4 +1,4 @@
-package com.youngsanimax.domain;
+package com.youngsanimax.domain.browser;
 
 import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebDriver;

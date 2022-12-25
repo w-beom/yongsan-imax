@@ -1,9 +1,7 @@
-package com.youngsanimax.domain;
+package com.youngsanimax.domain.browser;
 
 import org.openqa.selenium.WebDriver;
-import org.springframework.stereotype.Component;
 
-@Component
 public interface Browser {
     WebDriver getWebDriver();
 }

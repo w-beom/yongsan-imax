@@ -1,4 +1,4 @@
-package com.youngsanimax.domain;
+package com.youngsanimax.domain.cinema;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

@@ -1,7 +1,5 @@
-package com.youngsanimax.domain;
+package com.youngsanimax.domain.messenger;
 
 public interface Bot {
-    String getToken();
-
     boolean sendMessage(Message message);
 }

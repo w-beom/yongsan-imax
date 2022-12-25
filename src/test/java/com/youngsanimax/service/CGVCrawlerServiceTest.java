@@ -1,7 +1,7 @@
 package com.youngsanimax.service;
 
-import com.youngsanimax.domain.Browser;
-import com.youngsanimax.domain.Chrome;
+import com.youngsanimax.domain.browser.Browser;
+import com.youngsanimax.domain.browser.Chrome;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;

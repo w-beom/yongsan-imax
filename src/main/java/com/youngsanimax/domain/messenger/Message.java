@@ -1,7 +1,8 @@
-package com.youngsanimax.domain;
+package com.youngsanimax.domain.messenger;
 
-import org.springframework.beans.factory.annotation.Value;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class Message {
     private String chat_id;
     private String text;
@@ -13,5 +14,9 @@ public class Message {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public void printMessage() {
+        log.info("chatId : " + chat_id + " message : " + text);
     }
 }

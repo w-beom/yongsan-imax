@@ -1,5 +1,7 @@
 package com.youngsanimax.service;
 
+import com.youngsanimax.domain.browser.Browser;
+
 public interface CrawlerService {
-    void crawling() throws InterruptedException;
+    void crawling(Browser browser) throws InterruptedException;
 }
