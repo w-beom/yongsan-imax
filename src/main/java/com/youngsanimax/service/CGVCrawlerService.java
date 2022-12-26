@@ -66,7 +66,7 @@ public class CGVCrawlerService implements CrawlerService {
 
     private String getUrl() {
         String movieCdGroup = "20030160";
-        Theater theaterCode = Theater.YOUNGSAN;
+        Theater theaterCode = Theater.YONGSAN;
         String today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
 
         return "http://ticket.cgv.co.kr/Reservation/Reservation.aspx?MOVIE_CD=20031534&MOVIE_CD_GROUP=" + movieCdGroup + "&PLAY_YMD=" + today + "&THEATER_CD=" + theaterCode.getCode() + "&PLAY_NUM=&PLAY_START_TM=&AREA_CD=&SCREEN_CD=&THIRD_ITEM=&SCREEN_RATING_CD=";

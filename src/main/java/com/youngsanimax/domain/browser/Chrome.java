@@ -8,11 +8,15 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class Chrome implements Browser {
-    private static final String driverPath = "src/main/resources/drivers/chrome/chromedriver.exe";
-    private final WebDriver chromeDriver;
+    private static final String DRIVER_PATH = "src/main/resources/drivers/chrome/chromedriver.exe";
+    private WebDriver chromeDriver;
 
-    public Chrome() {
-        System.setProperty("webdriver.chrome.driver", driverPath);
+    private Chrome() {
+    }
+
+    @Override
+    public void createWebDriver() {
+        System.setProperty("webdriver.chrome.driver", DRIVER_PATH);
 
         ChromeOptions options = new ChromeOptions();
         options.setPageLoadStrategy(PageLoadStrategy.NORMAL);
@@ -21,7 +25,8 @@ public class Chrome implements Browser {
     }
 
     @Override
-    public WebDriver getWebDriver() {
+    public WebDriver openUrl(String url) {
+        chromeDriver.get(url);
         return chromeDriver;
     }
 }

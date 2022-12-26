@@ -27,7 +27,7 @@ public class TelegramBot implements Bot {
                     .post(RequestBody.create(json, MediaType.parse("application/json")))
                     .build();
 
-            Response response = okHttpClient.newCall(request).execute();
+            okHttpClient.newCall(request).execute();
             return true;
         } catch (Exception e) {
             log.error("메세지 전송에 실패하였습니다.", e);
