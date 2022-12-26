@@ -13,6 +13,7 @@ import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.support.CronTrigger;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ public class CGVCrawlerService implements CrawlerService {
     private final TelegramBot telegramBot;
     private final TaskScheduler taskScheduler;
     private WebDriver webDriver;
+    private CGV cgv;
 
     public CGVCrawlerService(TelegramBot telegramBot, TaskScheduler taskScheduler) {
         this.telegramBot = telegramBot;
@@ -35,23 +37,32 @@ public class CGVCrawlerService implements CrawlerService {
         telegramBot.sendMessage(new Message("5267186305", "서비스를 시작합니다."));
         browser.createWebDriver();
         webDriver = browser.openUrl(getUrl());
+        List<LocalDate> days = findDays(webDriver);
+        cgv = new CGV(days, "아바타", "20030160");
 
-        List<CGV> days = findDays(webDriver);
-        telegramBot.sendMessage(new Message("5267186305", days.toString()));
+        log.info("크롤링 성공 : " + cgv.getMovieName() + " " + cgv.getDays());
 
-        scheduleStart(webDriver);
+        startSchedule();
     }
 
-    private void scheduleStart(WebDriver webDriver) {
+    private void startSchedule() {
         ScheduledFuture<?> future = this.taskScheduler.schedule(() -> {
             webDriver.navigate().refresh(); //새로고침
-            List<CGV> delayDays = findDays(webDriver);
-            telegramBot.sendMessage(new Message("5267186305", "두번 째 " + delayDays.toString()));
+            webDriver.manage().timeouts().scriptTimeout(Duration.ofMillis(5000));
+            List<LocalDate> days = findDays(webDriver);
+
+            log.info("크롤링 성공 : " + cgv.getMovieName() + " " + cgv.getDays());
+
+            if (!cgv.sameDays(days)) {
+                telegramBot.sendMessage(new Message("5267186305", cgv.getMovieName() + " 영화 예매 하세요!" + getUrl()));
+            } else {
+                telegramBot.sendMessage(new Message("5267186305", cgv.getMovieName() + ""));
+            }
         }, new CronTrigger("*/30 * * * * *"));
     }
 
-    private List<CGV> findDays(WebDriver webDriver) {
-        List<CGV> movies = new ArrayList<>();
+    private List<LocalDate> findDays(WebDriver webDriver) {
+        List<LocalDate> dates = new ArrayList<>();
         List<WebElement> days = webDriver.findElements(By.xpath("//*[@id=\"date_list\"]/ul/div/li"));
         for (WebElement day : days) {
             String className = day.getAttribute("class");
@@ -59,9 +70,9 @@ public class CGVCrawlerService implements CrawlerService {
                 continue;
             }
             String movieDate = day.getAttribute("date");
-            movies.add(new CGV(movieDate, "아바타", "20030160"));
+            dates.add(LocalDate.parse(movieDate, DateTimeFormatter.ofPattern("yyyyMMdd")));
         }
-        return movies;
+        return dates;
     }
 
     private String getUrl() {

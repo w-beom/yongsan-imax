@@ -1,31 +1,52 @@
 package com.youngsanimax.domain.cinema;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Objects;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class CGV {
-    private LocalDate date;
+    private List<LocalDate> days;
     private String movieName;
     private String movieCode;
 
-    public CGV(String date, String movieName, String movieCode) {
-        this.date = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyyMMdd"));
+    public CGV(List<LocalDate> days, String movieName, String movieCode) {
+        this.days = days;
         this.movieName = movieName;
         this.movieCode = movieCode;
     }
 
-    public boolean equals(CGV cgv) {
-        if (this == cgv) {
-            return true;
-        }
-        if (cgv == null || getClass() != cgv.getClass()) {
-            return false;
-        }
-        return Objects.equals(date, cgv.date) && Objects.equals(movieCode, cgv.movieCode);
+    public String getMovieName() {
+        return movieName;
     }
 
-    public int hashCode() {
-        return Objects.hash(date, movieName, movieCode);
+    public String getMovieCode() {
+        return movieCode;
+    }
+
+    public String getDays() {
+        return days.stream()
+                .map(LocalDate::toString)
+                .collect(Collectors.joining(" "));
+    }
+
+    public boolean sameDays(List<LocalDate> paramDays) {
+        int daysSize = this.days.size();
+        int paramDaysSize = paramDays.size();
+
+        if (daysSize >= paramDaysSize) {
+            for (int i = 0; i < paramDaysSize; i++) {
+                if (!days.get(i).isEqual(paramDays.get(i))) {
+                    return false;
+                }
+            }
+        } else {
+            for (int i = 0; i < daysSize; i++) {
+                if (paramDays.get(i).isEqual(days.get(i))) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 }
