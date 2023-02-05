@@ -4,11 +4,12 @@ import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
 @Component
 public class Chrome implements Browser {
-    private static final String DRIVER_PATH = "src/main/resources/drivers/chrome/chromedriver.exe";
+    private static final String DRIVER_PATH = "/src/main/resources/drivers/chrome/chromedriver.exe";
     private WebDriver chromeDriver;
 
     private Chrome() {
@@ -16,6 +17,8 @@ public class Chrome implements Browser {
 
     @Override
     public void createWebDriver() {
+        ClassPathResource resource = new ClassPathResource("/drivers/chrome/chromedriver.exe");
+        System.out.println("경로 : " + resource.getPath());
         System.setProperty("webdriver.chrome.driver", DRIVER_PATH);
 
         ChromeOptions options = new ChromeOptions();
