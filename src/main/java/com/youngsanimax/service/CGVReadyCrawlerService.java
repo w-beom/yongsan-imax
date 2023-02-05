@@ -60,6 +60,7 @@ public class CGVReadyCrawlerService implements CrawlerService {
                                 if (i > 0) {
                                     telegramBot.sendMessage(new Message("-1001505589405", "앤트맨과 와스프-퀀텀매니아 예매준비알림!! \nhttp://www.cgv.co.kr/movies/pre-movies.aspx"));
                                 }
+                                log.info("title : " + title);
                             }
                         }
                     }
