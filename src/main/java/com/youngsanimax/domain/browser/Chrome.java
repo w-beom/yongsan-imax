@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Slf4j
 public class Chrome implements Browser {
-    private static final String DRIVER_PATH = "/";
+    private static final String DRIVER_PATH = "/yongsan-imax/src/main/resources/drivers/chrome/chromedriver.exe";
     private WebDriver chromeDriver;
 
     private Chrome() {
@@ -19,8 +19,6 @@ public class Chrome implements Browser {
 
     @Override
     public void createWebDriver() {
-        String property = System.getProperty("user.home");
-        log.info(property);
         System.setProperty("webdriver.chrome.driver", DRIVER_PATH);
 
         ChromeOptions options = new ChromeOptions();
