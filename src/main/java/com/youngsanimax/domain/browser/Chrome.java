@@ -1,5 +1,6 @@
 package com.youngsanimax.domain.browser;
 
+import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -8,8 +9,9 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
 @Component
+@Slf4j
 public class Chrome implements Browser {
-    private static final String DRIVER_PATH = "/src/main/resources/drivers/chrome/chromedriver.exe";
+    private static final String DRIVER_PATH = "/";
     private WebDriver chromeDriver;
 
     private Chrome() {
@@ -17,8 +19,8 @@ public class Chrome implements Browser {
 
     @Override
     public void createWebDriver() {
-        ClassPathResource resource = new ClassPathResource("/drivers/chrome/chromedriver.exe");
-        System.out.println("경로 : " + resource.getPath());
+        String property = System.getProperty("user.home");
+        log.info(property);
         System.setProperty("webdriver.chrome.driver", DRIVER_PATH);
 
         ChromeOptions options = new ChromeOptions();

@@ -27,6 +27,6 @@ public class MainController {
 
     @GetMapping("/crawler")
     public void crawl(@RequestParam Browser browser) {
-        cgvReadyCrawlerService.crawling(browser);
+        cgvCrawlerService.crawling(browser);
     }
 }
