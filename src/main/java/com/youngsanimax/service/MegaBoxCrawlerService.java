@@ -35,13 +35,13 @@ public class MegaBoxCrawlerService implements CrawlerService {
             try {
                 String url = "https://www.megabox.co.kr/on/oh/ohc/Brch/schedulePage.do";
                 MegaBox megaBox = MegaBox.builder()
-                        .brchNo("0028")
-                        .brchNo1("0028")
-                        .crtDe("20221227")
-                        .detailType("area")
+                        .areaCd("45")
+                        .crtDe("20230508")
                         .firstAt("N")
-                        .masterType("brch")
-                        .playDe("20230101")
+                        .masterType("movie")
+                        .movieNo("23018400")
+                        .movieNo1("23018400")
+                        .playDe("20230513")
                         .build();
 
                 String json = new Gson().toJson(megaBox);
@@ -60,7 +60,7 @@ public class MegaBoxCrawlerService implements CrawlerService {
                 for (Object o : moveFormList) {
                     MovieForm movieForm = objectMapper.convertValue(o, MovieForm.class);
                     log.info(movieForm.getMovieNm());
-                    if (movieForm.getRpstMovieNo().equals("22029100") && movieForm.getTheabNo().equals("07")) {
+                    if (movieForm.getRpstMovieNo().equals("23018400") && movieForm.getTheabNo().equals("07")) {
                         String text = movieForm.getPlayDe() + " " + movieForm.getRpstMovieNm() + " " + movieForm.getTheabEngNm() + "\n"
                                 + movieForm.getPlayStartTime() + " 예매 알림!!!!!";
                         telegramBot.sendMessage(new Message("-1001505589405", text));

@@ -15,4 +15,7 @@ public class MegaBox {
     private String firstAt;
     private String masterType;
     private String playDe;
+    private String areaCd;
+    private String movieNo;
+    private String movieNo1;
 }
