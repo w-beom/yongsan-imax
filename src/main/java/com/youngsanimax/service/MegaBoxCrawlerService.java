@@ -30,7 +30,7 @@ public class MegaBoxCrawlerService implements CrawlerService {
 
     @Override
     public void crawling(Browser browser) {
-        telegramBot.sendMessage(new Message("-1001505589405", "메가박스 아바타 알리미 서비스를 시작합니다."));
+        telegramBot.sendMessage(new Message("-1001505589405", "메가박스 가오갤3 알리미 서비스를 시작합니다."));
         ScheduledFuture<?> future = this.taskScheduler.schedule(() -> {
             try {
                 String url = "https://www.megabox.co.kr/on/oh/ohc/Brch/schedulePage.do";
@@ -57,10 +57,10 @@ public class MegaBoxCrawlerService implements CrawlerService {
                 ObjectMapper objectMapper = new ObjectMapper();
                 Movie movie = objectMapper.readValue(responseJson, Movie.class);
                 List<Object> moveFormList = (List<Object>) movie.getMegaMap().get("movieFormList");
+                log.info("가디언즈 오브 갤럭시 크롤링중");
                 for (Object o : moveFormList) {
                     MovieForm movieForm = objectMapper.convertValue(o, MovieForm.class);
-                    log.info(movieForm.getMovieNm());
-                    if (movieForm.getRpstMovieNo().equals("23018400") && movieForm.getTheabNo().equals("07")) {
+                    if (movieForm.getRpstMovieNo().equals("23018400") && movieForm.getTheabNo().equals("07") && movieForm.getAreaCd().equals("0028")) {
                         String text = movieForm.getPlayDe() + " " + movieForm.getRpstMovieNm() + " " + movieForm.getTheabEngNm() + "\n"
                                 + movieForm.getPlayStartTime() + " 예매 알림!!!!!";
                         telegramBot.sendMessage(new Message("-1001505589405", text));
